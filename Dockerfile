@@ -88,10 +88,9 @@ WORKDIR /opt
 FROM deps AS build
 
 WORKDIR $cwd
-COPY . .
-
 COPY entrypoint.sh /opt/bin/entrypoint.sh
 RUN chmod +x /opt/bin/entrypoint.sh
-RUN adduser root pulse-access
+ENTRYPOINT ["/opt/bin/entrypoint.sh"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 # CMD ["/bin/bash"] is added in entrypoint.sh
